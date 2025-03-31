@@ -1,21 +1,54 @@
 # Belajar Web Application CodeIgniter 4 di XAMPP
 
-## Chapter 1 Introduction
-1. Instalasi Composer - Instalasi Git Bash - Download Codeigniter4 
-2. Skema MVC Model-View-Controller 
-    [[ FLOWCHART ]]
-    Server :
-        .env (BASE_URL, CI_ENVIRONTMENT = development) 
-            app/Config/Routes.php 
-            (Menambahkan route method GET ex:$routes->get('/', Home:index))
-            <!-- page tampil default codeigniter pertama kali -->
-            (Menambahkan route method GET ex:$routes->get('/test', Home:test))
-            <!-- page tampil output string dari dalam class test() secara langsung dari app/Controllers/Home.php-->
-            Membuat file Razan.php khusus untuk sekumpulan class() soal perkenalan
-            (Menambahkan route method GET ex:$routes->get('/razan', Razan:index))
-            <!-- output string "My Name Is Bruce Wayne" dari dalam class index() secara langsung dari app/Controllers/Razan.php-->
-            Kustom Property $this->jobs = "Web Developer" di file app/Controllers/BaseController.php
-            (Menambahkan route method GET ex:$routes->get('/razan/developer', Razan:jobs))
-            <!-- output string "My Name Is Bruce Wayne As Web Developer" dari dalam class index() secara langsung dari app/Controllers/Razan.php-->
-3.  
-## Chapter 2 
+## Chapter 1: Introduction
+
+### 1. Instalasi
+- **Composer**: Instalasi Composer untuk manajemen dependensi.
+- **Git Bash**: Instalasi Git Bash untuk versi kontrol.
+- **CodeIgniter 4**: Download dan konfigurasi CodeIgniter 4.
+
+### 2. Skema MVC (Model-View-Controller)
+
+#### **Flowchart**
+
+##### **Server Configuration**
+1. **Konfigurasi `.env`**
+   - Set `BASE_URL`.
+   - Atur `CI_ENVIRONMENT = development`.
+
+2. **Routing di `app/Config/Routes.php`**
+   - **Menambahkan Route Default**
+     ```php
+     $routes->get('/', 'Home::index');
+     ```
+     *Menampilkan halaman default CodeIgniter.*
+   
+   - **Menambahkan Route Test**
+     ```php
+     $routes->get('/test', 'Home::test');
+     ```
+     *Menampilkan output string dari method `test()` dalam `app/Controllers/Home.php`.*
+
+3. **Membuat Controller Razan**
+   - **Menambahkan file `Razan.php` untuk soal perkenalan**
+   - **Menambahkan Route Razan**
+     ```php
+     $routes->get('/razan', 'Razan::index');
+     ```
+     *Menampilkan output string "My Name Is Bruce Wayne" dari method `index()` di `app/Controllers/Razan.php`.*
+
+4. **Kustom Property dalam `BaseController.php`**
+   - **Menambahkan properti di `BaseController.php`**
+     ```php
+     protected $jobs = "Web Developer";
+     ```
+   - **Menambahkan Route Developer**
+     ```php
+     $routes->get('/razan/developer', 'Razan::jobs');
+     ```
+     *Menampilkan output string "My Name Is Bruce Wayne As Web Developer" dari method `jobs()` di `app/Controllers/Razan.php`.*
+
+---
+
+## Chapter 2: ... *(Lanjutkan di sini)*
+
