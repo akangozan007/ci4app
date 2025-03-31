@@ -44,7 +44,40 @@
      ```
    - **Menambahkan Route Developer**
      ```php
-     $routes->get('/razan/developer', 'Razan::jobs');
+     protected $routes->get('/razan/developer', 'Razan::jobs');
+     ```
+     *Menampilkan output string "My Name Is Bruce Wayne As Web Developer" dari method `jobs()` di `app/Controllers/Razan.php`.*
+
+     5. **Menambahkan param dalam `D:\xampp82\htdocs\ci4app\app\Config\Routes.php`**
+     ```php
+     // route dengan param
+    // /param/inputan apapun 
+    // index/$1 mengurutkan variable yang masuk kedalam class
+    $routes->get('/param/(:any)', 'Param::index/$1');
+     ```
+    6.  **Menambahkan Controller D:\xampp82\htdocs\ci4app\app\Controllers\Param.php**
+     ```php
+     protected 
+     
+        namespace App\Controllers;
+        class Param extends BaseController
+        {
+            // menambahkan parameter 1 adalah scan usia, 2 scan nama, 3 scan domisili
+            public function index($usia = '', $nama = '', $domisili = '')
+            {
+                echo 'ex: /param/18/razan/kaligawe<br>';
+                
+                $data = [$usia, $nama, $domisili];
+                
+                echo '<ul>';
+                foreach ($data as $item) {
+                    echo '<li>' . htmlspecialchars($item) . '</li>';
+                }
+                echo '</ul>';
+            }
+
+            
+        } 
      ```
      *Menampilkan output string "My Name Is Bruce Wayne As Web Developer" dari method `jobs()` di `app/Controllers/Razan.php`.*
 
