@@ -13,7 +13,7 @@
 
 ### 3. Konfigurasi Server
 #### **1. Konfigurasi `.env`**
-- Set **`BASE_URL`**.
+- Set **`BASE_URL = 'http://localhost:8080/' `**.
 - Atur **`CI_ENVIRONMENT = development`**.
 
 #### **2. Routing di `app/Config/Routes.php`**
