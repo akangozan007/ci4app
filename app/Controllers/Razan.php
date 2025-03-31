@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Home extends BaseController
+class Razan extends BaseController
 {
     // public function index(): string
     // {
@@ -11,12 +11,12 @@ class Home extends BaseController
     public function index()
     {
         // return view('welcome_message');
-        echo '<h1>My First CodeIgniter Development<h1>';
+        echo '<h1>My Name Is Bruce Wayne<h1>';
     }
-    public function test()
+    public function developer()
     {
         // return view('welcome_message');
-        echo '<h1>Testing Route And Controller<h1>';
+        echo '<h1>My Name Is Bruce Wayne my job as '.$this->jobs.'<h1>';
     }
     
 }
