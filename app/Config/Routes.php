@@ -14,4 +14,10 @@ $routes->get('/razan/developer', 'Razan::developer');
 // route dengan param
 // /param/inputan apapun 
 // index/$1 mengurutkan variable yang masuk kedalam class
+// (:any) untuk apapun
+// (:num) untuk number
+// (:alphanum) untuk alphabet & number
 $routes->get('/param/(:any)', 'Param::index/$1');
+// routes khusus admin
+// Get Welcome Admin Panel Page
+$routes->get('/users', 'Admin\Users::index');
