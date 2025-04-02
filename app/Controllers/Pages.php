@@ -22,16 +22,16 @@ class Pages extends BaseController
     public function index()
     {
         // page home dengan header dan footer
-        echo view('pages/layout/header');
+        echo view('layout/header');
         echo view('pages/homepage');
-        echo view('pages/layout/footer');
+        echo view('layout/footer');
     }
     public function about()
     {
         // page about dengan header dan footer
-        echo view('pages/layout/header');
+        echo view('layout/header');
         echo view('pages/about');
-        echo view('pages/layout/footer');
+        echo view('layout/footer');
     }
     
 }
