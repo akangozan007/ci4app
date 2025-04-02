@@ -8,17 +8,30 @@ class Pages extends BaseController
     // {
     //     return view('welcome_message');
     // }
+    // public function index()
+    // {
+    //     // menampilan file ci4app\app\Views\pages\homepage.php
+    //     return view('pages/homepage');
+    // }
+    // public function about()
+    // {
+    //     // menampilan file ci4app\app\Views\pages\homepage.php
+    //     return view('pages/about');
+    // }
+
     public function index()
     {
-        // menampilan file ci4app\app\Views\pages\homepage.php
-        return view('pages/homepage');
+        // page home dengan header dan footer
+        echo view('pages/layout/header');
+        echo view('pages/homepage');
+        echo view('pages/layout/footer');
     }
     public function about()
     {
-        // menampilan file ci4app\app\Views\pages\homepage.php
-        return view('pages/about');
+        // page about dengan header dan footer
+        echo view('pages/layout/header');
+        echo view('pages/about');
+        echo view('pages/layout/footer');
     }
-
-
     
 }
