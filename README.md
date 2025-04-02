@@ -1,77 +1,79 @@
 # Belajar Web Application CodeIgniter 4 di XAMPP
 
-## Chapter 1: Introduction
+## **Chapter 1: Introduction**
 
-### 1. Instalasi
-- **Composer**: Instalasi Composer untuk manajemen dependensi.
-- **Git Bash**: Instalasi Git Bash untuk versi kontrol.
-- **CodeIgniter 4**: Download dan konfigurasi CodeIgniter 4.
+### **1. Instalasi**
+- **Composer**: Instal Composer untuk manajemen dependensi.
+- **Git Bash**: Instal Git Bash untuk versi kontrol.
+- **CodeIgniter 4**: Unduh dan konfigurasi CodeIgniter 4.
 
-### 2. Skema MVC (Model-View-Controller)
+### **2. Skema MVC (Model-View-Controller)**
+#### **Flowchart** *(Tambahkan flowchart jika tersedia)*
 
-#### **Flowchart**
+---
 
-## Chapter 2: Basic Setup & Development
+## **Chapter 2: Basic Setup & Development**
 
-### 3. Konfigurasi Server
-#### **1. Konfigurasi `.env`**
-- Set **`BASE_URL = 'http://localhost:8080/' `**.
+### **3. Konfigurasi Server**
+#### **Konfigurasi `.env`**
+- Set **`BASE_URL = 'http://localhost:8080/'`**.
 - Atur **`CI_ENVIRONMENT = development`**.
 
-## Chapter 3: Routing
+---
 
-#### **2. Routing di `app/Config/Routes.php`**
-##### **Menambahkan Route Default**
+## **Chapter 3: Routing**
+
+### **1. Routing di `app/Config/Routes.php`**
+#### **Menambahkan Route Default**
 ```php
 $routes->get('/', 'Home::index');
 ```
 *Menampilkan halaman default CodeIgniter.*
 
-##### **Menambahkan Route Test**
+#### **Menambahkan Route Test**
 ```php
 $routes->get('/test', 'Home::test');
 ```
-*Menampilkan output string dari method `test()` dalam `app/Controllers/Home.php`.*
+*Menampilkan output dari method `test()` dalam `app/Controllers/Home.php`.*
 
-#### **3. Membuat Controller Razan**
-##### **Menambahkan Controller `Razan.php`**
-- Buat file `app/Controllers/Razan.php` untuk pengenalan dasar.
+### **2. Membuat Controller `Razan.php`**
+#### **Menambahkan Controller `Razan.php`**
+- Buat file `app/Controllers/Razan.php`.
 
-##### **Menambahkan Route Razan**
+#### **Menambahkan Route Razan**
 ```php
 $routes->get('/razan', 'Razan::index');
 ```
-*Menampilkan output string "My Name Is Bruce Wayne" dari method `index()` di `app/Controllers/Razan.php`.*
+*Menampilkan output "My Name Is Bruce Wayne" dari method `index()` di `app/Controllers/Razan.php`.*
 
-#### **4. Menambahkan Properti dalam `BaseController.php`**
-##### **Menambahkan Properti di `BaseController.php`**
+### **3. Menambahkan Properti dalam `BaseController.php`**
+#### **Menambahkan Properti di `BaseController.php`**
 ```php
 protected $jobs = "Web Developer";
 ```
-##### **Menambahkan Route Developer**
+#### **Menambahkan Route Developer**
 ```php
 $routes->get('/razan/developer', 'Razan::jobs');
 ```
-*Menampilkan output string "My Name Is Bruce Wayne As Web Developer" dari method `jobs()` di `app/Controllers/Razan.php`.*
+*Menampilkan "My Name Is Bruce Wayne As Web Developer" dari method `jobs()` di `app/Controllers/Razan.php`.*
 
-#### **5. Menambahkan Parameter dalam Routing**
-##### **Mengatur Route di `app/Config/Routes.php`**
+### **4. Menambahkan Parameter dalam Routing**
+#### **Mengatur Route di `app/Config/Routes.php`**
 ```php
-// Route dengan parameter
-// /param/inputan apapun
-// index/$1 mengurutkan variable yang masuk ke dalam class
 $routes->get('/param/(:any)', 'Param::index/$1');
 ```
-## Chapter 4: Controller
 
-#### **6. Membuat Controller `Param.php`**
-##### **Menambahkan File `app/Controllers/Param.php`**
+---
+
+## **Chapter 4: Controller**
+
+### **1. Membuat Controller `Param.php`**
+#### **Menambahkan File `app/Controllers/Param.php`**
 ```php
 namespace App\Controllers;
 
 class Param extends BaseController
 {
-    // Menambahkan parameter: 1 untuk usia, 2 untuk nama, 3 untuk domisili
     public function index($usia = '', $nama = '', $domisili = '')
     {
         echo 'ex: /param/18/razan/kaligawe<br>';
@@ -87,102 +89,92 @@ class Param extends BaseController
 }
 ```
 
----
-#### **6. Membuat Controller kedalam sebuah namespace `app\Controllers\Admin\Users.php`**
-##### **Menambahkan File `app\Controllers\Admin\Users.php`**
+### **2. Membuat Controller dengan Namespace `app/Controllers/Admin/Users.php`**
+#### **Menambahkan File `app/Controllers/Admin/Users.php`**
 ```php
 <?php
-
-// register namespace admin
-// namespace App\Controllers;
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 
-// class Users
 class Users extends BaseController
 {
-    // menambahkan parameter
     public function index()
     {
         echo 'Selamat datang Admin';
     }
-
-    
 }
-?>
-
 ```
-##### **Tujuannya untuk membedakan page mana yang akan ditampilkan untuk user biasa dan admin**
-##### **Membuat folder `app\Controllers\Admin\`**
-
+#### **Tujuan:**
+- Untuk membedakan halaman yang ditampilkan untuk pengguna biasa dan admin.
+- Membuat folder `app/Controllers/Admin/`.
 
 ---
-## Chapter 5: Views
-#### **7. Membuat beberapa Views (Homepage.php, about dll) ke `app\Views\`**
 
-##### **https://url:8080/pages/**
-##### **terpanggil di class index `app\Controllers\Pages.php`**
-##### **terRouting di `app\Config\Routes.php` menjadi `$routes->get('/pages/', 'Pages::index');`**
-##### **`app\Views\Homepage.php`**
-``` php
+## **Chapter 5: Views**
+
+### **1. Membuat Beberapa Views (`Homepage.php`, `About.php`, dll.)**
+#### **Routing di `app/Config/Routes.php`**
+```php
+$routes->get('/pages/', 'Pages::index');
+```
+
+#### **`app/Views/Homepage.php`**
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Razan Belajar Codeigniter</title>
+    <title>Razan Belajar CodeIgniter</title>
 </head>
 <body>
     <h1>Homepage</h1>
-    
 </body>
 </html>
-
 ```
 
-##### **terpanggil di class About `app\Controllers\Pages.php`**
-##### **terRouting di `app\Config\Routes.php` menjadi `$routes->get('/pages/', 'Pages::about');`**
-##### **`app\Views\About.php`**
-``` php
+#### **`app/Views/About.php`**
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Razan Belajar Codeigniter</title>
+    <title>Razan Belajar CodeIgniter</title>
 </head>
 <body>
     <h1>About</h1>
-    
 </body>
 </html>
-
 ```
 
-##### **Membuat beberapa multiple view**
-##### **Membuat folder `app\Views\pages\layout`**
-##### **Penambahan dengan css bootstrap 5**
+### **2. Menggunakan Multiple Views dengan Bootstrap 5**
+#### **Membuat Folder `app/Views/pages/layout/`**
 
-##### **Membuat file `app\Views\pages\layout\header.php`**
-``` php
+#### **`app/Views/pages/layout/header.php`**
+```html
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Bootstrap Demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-
+</head>
+<body>
 ```
 
-
-##### **Membuat file `app\Views\pages\layout\footer.php`**
-``` php
+#### **`app/Views/pages/layout/footer.php`**
+```html
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="main.js"></script>
-  </body>
+<script src="main.js"></script>
+</body>
+</html>
 ```
+
+---
+## **Kesimpulan**
+- Anda telah mempelajari dasar-dasar instalasi, routing, controller, dan views di CodeIgniter 4.
+- And
