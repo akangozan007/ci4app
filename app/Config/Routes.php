@@ -5,7 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Pages::index');
 // menambahkan routing
 $routes->get('/test', 'Home::test');
 // menambahkan controller & menambahkan routing
