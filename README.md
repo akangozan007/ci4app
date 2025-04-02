@@ -62,7 +62,7 @@ $routes->get('/razan/developer', 'Razan::jobs');
 // index/$1 mengurutkan variable yang masuk ke dalam class
 $routes->get('/param/(:any)', 'Param::index/$1');
 ```
-## Chapter 3: Controller
+## Chapter 4: Controller
 
 #### **6. Membuat Controller `Param.php`**
 ##### **Menambahkan File `app/Controllers/Param.php`**
