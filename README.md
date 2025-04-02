@@ -117,3 +117,50 @@ class Users extends BaseController
 ##### **Membuat folder `app\Controllers\Admin\`**
 
 
+---
+## Chapter 5: Views
+#### **7. Membuat beberapa Views (Homepage.php, about dll) ke `app\Views\`**
+
+##### **https://url:8080/pages/**
+##### **terpanggil di class index `app\Controllers\Pages.php`**
+##### **terRouting di `app\Config\Routes.php` menjadi `$routes->get('/pages/', 'Pages::index');`**
+##### **`app\Views\Homepage.php`**
+``` php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razan Belajar Codeigniter</title>
+</head>
+<body>
+    <h1>Homepage</h1>
+    
+</body>
+</html>
+
+```
+
+##### **terpanggil di class About `app\Controllers\Pages.php`**
+##### **terRouting di `app\Config\Routes.php` menjadi `$routes->get('/pages/', 'Pages::about');`**
+##### **`app\Views\About.php`**
+``` php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razan Belajar Codeigniter</title>
+</head>
+<body>
+    <h1>About</h1>
+    
+</body>
+</html>
+
+```
+
+##### **Membuat beberapa laman static**
+
+
+
