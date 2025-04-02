@@ -11,10 +11,14 @@
 
 #### **Flowchart**
 
+## Chapter 2: Basic Setup & Development
+
 ### 3. Konfigurasi Server
 #### **1. Konfigurasi `.env`**
 - Set **`BASE_URL = 'http://localhost:8080/' `**.
 - Atur **`CI_ENVIRONMENT = development`**.
+
+## Chapter 3: Routing
 
 #### **2. Routing di `app/Config/Routes.php`**
 ##### **Menambahkan Route Default**
@@ -58,6 +62,7 @@ $routes->get('/razan/developer', 'Razan::jobs');
 // index/$1 mengurutkan variable yang masuk ke dalam class
 $routes->get('/param/(:any)', 'Param::index/$1');
 ```
+## Chapter 3: Controller
 
 #### **6. Membuat Controller `Param.php`**
 ##### **Menambahkan File `app/Controllers/Param.php`**
