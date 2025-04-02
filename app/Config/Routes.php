@@ -21,3 +21,8 @@ $routes->get('/param/(:any)', 'Param::index/$1');
 // routes khusus admin
 // Get Welcome Admin Panel Page
 $routes->get('/users', 'Admin\Users::index');
+
+
+// static page
+$routes->get('/pages/', 'Pages::index');
+$routes->get('/pages/about', 'Pages::about');

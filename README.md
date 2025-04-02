@@ -85,6 +85,29 @@ class Param extends BaseController
 ---
 #### **6. Membuat Controller kedalam sebuah namespace `app\Controllers\Admin\Users.php`**
 ##### **Menambahkan File `app\Controllers\Admin\Users.php`**
+```php
+<?php
+
+// register namespace admin
+// namespace App\Controllers;
+namespace App\Controllers\Admin;
+
+use App\Controllers\BaseController;
+
+// class Users
+class Users extends BaseController
+{
+    // menambahkan parameter
+    public function index()
+    {
+        echo 'Selamat datang Admin';
+    }
+
+    
+}
+?>
+
+```
 ##### **Tujuannya untuk membedakan page mana yang akan ditampilkan untuk user biasa dan admin**
 ##### **Membuat folder `app\Controllers\Admin\`**
 
