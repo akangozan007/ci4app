@@ -25,3 +25,5 @@ $routes->get('/pages/contact-me', 'Pages::contact');
 
 // database sekolah page
 $routes->get('/sekolah', 'Sekolah::index');
+// database sekolah page
+$routes->get('/sekolah/(:segment)', 'Sekolah::detail/$1');

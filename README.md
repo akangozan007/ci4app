@@ -469,7 +469,6 @@ class Pages extends BaseController
 </head>
 ```
 
-
 ---
 ## **Database**
 ### **Mengedit file .env file `ci4app\.env` :**
@@ -500,6 +499,117 @@ database.default.port = 3306
 
 
 ```
+
+## **Chapter 8: Custom Models (Membuat kerangka CRUD dengan Database)**
+### **Kustomisasi model dengan method sendiri di guru model sekolah di file `app\Models\Guru.php` :**
+
+```php
+
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class Guru extends Model
+{
+    protected $table = 'guru';
+    protected $primaryKey = 'id_guru';
+    protected $useTimestamps = true;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+
+// get data guru
+// $slug untuk mengambil parameter
+    public function getGuru($slug = false)
+    {
+        if ($slug == false) {
+            return $this->findAll();
+        }
+        return $this->where(['slug' => $slug])->first();
+    }
+}
+
+```
+### **Kustomisasi model dengan method sendiri di siswa model sekolah di file `app\Models\Siswa.php` :**
+
+```php
+
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class Guru extends Model
+{
+    protected $table = 'siswa';
+    protected $primaryKey = 'id_siswa';
+    protected $useTimestamps = true;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+
+// get data guru
+// $slug untuk mengambil parameter
+    public function getSiswa($slug = false)
+    {
+        if ($slug == false) {
+            return $this->findAll();
+        }
+        return $this->where(['slug' => $slug])->first();
+    }
+}
+
+```
+## **Chapter 9: Views Detail page untuk edit**
+### **menambahkan detail page untuk edit dan hapus di file `app\Views\sekolah\detail.php` :**
+```php
+  <!-- memanggil template -->
+    <?= $this->extend('layout/template');?>
+
+    <?= $this->section('content');?>
+    <!-- isi konten database -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                    <?php if($guru): ?>
+                    <img src="<?= $guru['gambar'] ;?>" class="img-fluid rounded-start" alt="...">
+                    <?php endif; ?>
+                    <?php if($siswa): ?>
+                    <img src="<?= $siswa['gambar'] ;?>" class="img-fluid rounded-start" alt="...">
+                    <?php endif; ?>
+                    </div>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <?php if($guru): ?>
+                        <h5 class="card-title"><?= $guru['nama'] ;?></h5>
+                        <p class="card-text">NIP            : <?= $guru['nip'] ;?></p>
+                        <p class="card-text">Guru pengampu  : <?= $guru['mata_pelajaran'] ;?></p>
+                        <p class="card-text">Handphone : <?= $guru['nip'] ;?></p>
+                        <p class="card-text"><small class="text-body-secondary"><?= $guru['alamat'] ;?></small></p>
+                        <?php endif; ?>
+                        <?php if($siswa): ?>
+                        <h5 class="card-title"><?= $siswa['nama'] ;?></h5>
+                        <p class="card-text">NIS            : <?= $siswa['nis'] ;?></p>
+                        <p class="card-text">kelas          : <?= $siswa['kelas'] ;?></p>
+                        <p class="card-text"><small class="text-body-secondary"><?= $siswa['alamat'] ;?></small></p>
+                        <?php endif; ?>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- ./isi konten database -->
+    <?= $this->endSection();?>
+
+```
+
+
 ---
 ## **Kesimpulan**
 - Anda telah mempelajari dasar-dasar instalasi, routing, controller, views (menamba), dan views di CodeIgniter 4.
