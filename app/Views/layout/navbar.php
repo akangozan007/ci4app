@@ -15,6 +15,9 @@
             <li class="nav-item">
               <a class="nav-link" href="/pages/contact-me">Contact</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/sekolah">Data Siswa & Guru</a>
+            </li>
           </ul>
         </div>
       </div>

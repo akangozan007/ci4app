@@ -22,3 +22,6 @@ $routes->get('/users', 'Admin\Users::index');
 $routes->get('/pages/', 'Pages::index');
 $routes->get('/pages/about', 'Pages::about');
 $routes->get('/pages/contact-me', 'Pages::contact');
+
+// database sekolah page
+$routes->get('/sekolah', 'Sekolah::index');

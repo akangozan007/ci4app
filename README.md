@@ -423,6 +423,84 @@ class Pages extends BaseController
   </html>
 ```
 ---
+## **Chapter 7: Models (Membuat kerangka CRUD dengan Database)**
+### **Membuat controller model sekolah di file `app\Controllers\Sekolah.php` :**
+```php
+// agar terlihat lebih terstruktur kita perlu memindahkan navbar kita
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?= esc($title); ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+      <!-- partial navbar -->
+      <?= $this->include('layout/navbar'); ?>
+      <!-- ./partial navbar -->
+
+      <!-- renderring content -->
+        <?= $this->renderSection('content'); ?>
+      <!-- ./renderring content -->
+    
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+  </body>
+  </html>
+```
+
+---
+## **Adding CSS**
+### **Menambahkan Kustom CSS di file `ci4app\public\css\styles.css` :**
+```css
+  /* custom css disini */
+```
+
+---
+## **Callback CSS**
+### **Menyisipkan link CSS di file `ci4app\public\css\styles.css` :**
+```html
+<head>
+   <!-- code -->
+      <link rel="stylesheet" href="/css/styles.css">
+   <!-- another code -->
+</head>
+```
+
+
+---
+## **Database**
+### **Mengedit file .env file `ci4app\.env` :**
+```env
+<!-- another code -->
+
+app.baseURL = 'http://localhost:8080'
+# If you have trouble with `.`, you could also use `_`.
+# app_baseURL = ''
+# app.forceGlobalSecureRequests = false
+# app.CSPEnabled = false
+
+<!-- another code -->
+
+<!-- masukkan parameter ini sesuai konfigurasi yang anda miliki  -->
+<!-- alamat server Codeigniter -->
+database.default.hostname = localhost
+<!-- Nama Database -->
+database.default.database = sekolah
+<!-- username database -->
+database.default.username = root
+<!-- password database -->
+database.default.password = 
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+<!-- port service mysql server -->
+database.default.port = 3306
+
+
+```
+---
 ## **Kesimpulan**
 - Anda telah mempelajari dasar-dasar instalasi, routing, controller, views (menamba), dan views di CodeIgniter 4.
 - And
