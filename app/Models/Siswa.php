@@ -17,6 +17,7 @@ class Siswa extends Model
     public function getSiswa($slug = false)
     {
         if ($slug == false) {
+            // sama seperti select * from siswa;
             return $this->findAll();
         }
         return $this->where(['slug' => $slug])->first();
