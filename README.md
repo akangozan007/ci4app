@@ -609,8 +609,262 @@ class Guru extends Model
 
 ```
 
+## **Chapter 10: Insert Data siswa dan guru**
+### **menambahkan class controllers saveGuru di file `app\Controllers\Sekolah.php` :**
+```php
+  
+  //Form Menyimpan Data Guru
+    public function saveGuru()
+    {
+        // debug
+        // dd($this->request->getVar());
+        $nama = $this->request->getVar('nama');
+        if (isset($nama)) {
+            $param = $nama;
+            $slug = md5($param);
+            $date = date('d-m-y');
+            $slug = md5($param.$date);
+            // Format UUID (8-4-4-4-12)
+            $formatted = substr($slug, 0, 8) . '-' .
+                 substr($slug, 8, 4) . '-' .
+                 substr($slug, 12, 4) . '-' .
+                 substr($slug, 16, 4) . '-' .
+                 substr($slug, 20, 12);
+            // echo '<br>';
+            // echo $formatted; 
+            $this->guruModel->save([
+                'nama'=>$this->request->getVar('nama'),
+                'nip'=>$this->request->getVar('nip'),
+                'mata_pelajaran'=>$this->request->getVar('mapel'),
+                'alamat'=>$this->request->getVar('alamat'),
+                'no_hp'=>$this->request->getVar('no_hp'),
+                'slug'=>$formatted,
+                'created_at'=>$date,
+                'updated_at'=>$date,
+            ]);
+            // session flash
+            session()->setFlashdata('pesan', 'data'.$nama.' berhasil ditambahkan');
+            // jika berhasil update maka redirect ke page index sekolah
+            return redirect()->to('/sekolah');
+         }
+
+    }
+
+
+```
+### **menambahkan class controllers saveSiswa di file `app\Controllers\Sekolah.php` :**
+```php
+  
+  //Form Menyimpan Data Siswa
+    public function saveSiswa()
+    {
+        // debug dump data
+        // dd($this->request->getVar());
+        $nama = $this->request->getVar('nama');
+        if (isset($nama)) {
+            $param = $nama;
+            $slug = md5($param);
+            $date = date('d-m-y');
+            $slug = md5($param.$date);
+            // Format UUID (8-4-4-4-12)
+            $formatted = substr($slug, 0, 8) . '-' .
+                 substr($slug, 8, 4) . '-' .
+                 substr($slug, 12, 4) . '-' .
+                 substr($slug, 16, 4) . '-' .
+                 substr($slug, 20, 12);
+            // echo '<br>';
+            // echo $formatted; 
+         }
+        $this->siswaModel->save([
+            'nama'=>$this->request->getVar('nama'),
+            'nis'=>$this->request->getVar('nis'),
+            'kelas'=>$this->request->getVar('kelas'),
+            'alamat'=>$this->request->getVar('alamat'),
+            'id_guru_wali'=>$this->request->getVar('walikelas'),
+            'slug'=>$formatted,
+            'created_at'=>$date,
+            'updated_at'=>$date,
+        ]);
+        // session flash
+        session()->setFlashdata('pesan', 'data'.$nama.' berhasil ditambahkan');
+        // jika berhasil update maka redirect ke page index sekolah
+        return redirect()->to('/sekolah');
+    }
+
+
+```
+
+### **mengedit model getGuru di file `app\Models\Guru.php` :**
+```php
+  
+      <?php
+
+    namespace App\Models;
+
+    use CodeIgniter\Model;
+
+    class Guru extends Model
+    {
+        protected $table = 'guru';
+        protected $primaryKey = 'id_guru';
+        protected $useTimestamps = true;
+        protected $createdField  = 'created_at';
+        protected $updatedField  = 'updated_at';
+        // data yang diizinkan untuk ditambahkan ke server
+        // sesuaikan dengan nama column yang bersangkutan table kalian masing masing ya
+        protected $allowedFields  = ['nama','nip','mata_pelajaran','alamat','no_hp','slug'];
+
+        public function getGuru($slug = false)
+        {
+            if ($slug == false) {
+                // sama seperti select * from guru;
+                return $this->findAll();
+            }
+            return $this->where(['slug' => $slug])->first();
+        }
+    }
+
+```
+
+### **mengedit model getSiswa di file `app\Models\Siswa.php` :**
+```php
+  
+          <?php
+
+    namespace App\Models;
+
+    use CodeIgniter\Model;
+
+    class Siswa extends Model
+    {
+        protected $table = 'siswa';
+        protected $primaryKey = 'id_siswa';
+        protected $useTimestamps = true;
+        protected $createdField  = 'created_at';
+        protected $updatedField  = 'updated_at';
+        // data yang diizinkan untuk ditambahkan ke server
+        protected $allowedFields  = ['nama','nis','kelas','alamat','id_guru_wali','slug'];
+
+        public function getSiswa($slug = false)
+        {
+            if ($slug == false) {
+                // sama seperti select * from siswa;
+                return $this->findAll();
+            }
+            return $this->where(['slug' => $slug])->first();
+        }
+        
+    }
+
+```
+
+
+### **Penyesuaian views untuk addsiswa di file `app\Views\sekolah\addsiswa.php` :**
+```php
+  
+  <!-- memanggil template -->
+  <?= $this->extend('layout/template');?>
+
+  <?= $this->section('content');?>
+  <!-- isi konten form tambah Siswa -->
+      <div class="container">
+          <div class="row">
+              <div class="col-6">
+                  <h1> Form Tambah Siswa</h1>
+                  // method post arahkan ke route post /sekolah/saveSiswa
+                  <form action="/sekolah/saveSiswa" method="post">
+                      <?= csrf_field(); ?>
+                      <div class="input-group mb-3">
+                          <div class="row">
+                              <div class="col-6">
+                                  <label for="nama">Data nama lengkap</label>
+                                  <input name="nama" type="text" class="form-control" placeholder="nama" aria-label="nama" aria-describedby="basic-addon1">
+                              </div>
+                              <div class="col-6">
+                                  <label for="NIS">Data NIS (Wajib diisi)</label>
+                                  <input name="nis" type="text" class="form-control" placeholder="NIS" aria-label="NIS" aria-describedby="basic-addon1">
+                              </div>
+                              <div class="col-6">
+                                  <label for="kelas">Data kelas</label>
+                                  <input name="kelas" type="text" class="form-control" placeholder="kelas" aria-label="kelas" aria-describedby="basic-addon1">
+                              </div>
+                              <div class="col-6">
+                                  <label for="wali">Pilih Wali kelas</label>
+                                  <select name="walikelas" class="form-select" id="pilihan">
+                                  <label for="Pilih Wali Kelas"></label>
+                                      <option selected>Silakan Pilih</option>
+                                      <?php foreach($guru as $pilih_guru) : ?>
+                                          <option value="1"><?= $pilih_guru['nama'];?> kode Guru : <?= $pilih_guru['id_guru'];?></option>
+                                      <?php endforeach; ?>
+                                  </select>
+                              </div>
+                              <div class="col-6">
+                                  <label for="alamat">Data alamat</label>
+                                  <textarea name="alamat" class="form-control" aria-label="alamat" placeholder="alamat"></textarea>
+                              </div>
+                          </div>
+                          <div class="container mt-4">
+                              <button type="submit" class="btn btn-primary">Tambah Data</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  <!-- isi konten form tambah Siswa -->
+  <?= $this->endSection();?>
+
+```
+
+### **Penyesuaian views untuk addguru di file `app\Views\sekolah\addguru.php` :**
+```php
+  <!-- memanggil template -->
+  <?= $this->extend('layout/template');?>
+
+  <?= $this->section('content');?>
+  <!-- isi konten form tambah Guru -->
+      <div class="container">
+          <div class="row">
+              <div class="col-6">
+                  <h1> Form Tambah Guru</h1>
+                  <form action="/sekolah/saveGuru" method="post">
+                      <?= csrf_field(); ?>
+                      <div class="input-group mb-3">
+                          <div class="row">
+                              <div class="col-6">
+                                  <label for="nama">Data nama lengkap</label>
+                                  <input name="nama" type="text" class="form-control" placeholder="nama" aria-label="nama" aria-describedby="basic-addon1">
+                              </div>
+                              <div class="col-6">
+                                  <label for="NIP">Data NIP (Wajib diisi)</label>
+                                  <input name="nip" type="text" class="form-control" placeholder="NIP" aria-label="NIP" aria-describedby="basic-addon1">
+                              </div>
+                              <div class="col-6">
+                                  <label for="mapel">Data pengampu mata pelajaran</label>
+                                  <input name="mapel" type="text" class="form-control" placeholder="mata pelajaran" aria-label="mapel" aria-describedby="basic-addon1">
+                              </div>
+                              <div class="col-6">
+                                  <label for="ponsel">Data nomor whatsapp</label>
+                                  <input name="ponsel" type="text" class="form-control" placeholder="nomor ponsel" aria-label="ponsel" aria-describedby="basic-addon1">
+                              </div>
+                              <div class="col-6">
+                                  <label for="alamat">Data alamat</label>
+                                  <textarea name="alamat" class="form-control" aria-label="alamat" placeholder="alamat"></textarea>
+                              </div>
+                          </div>
+                          <div class="container mt-4">
+                              <button type="submit" class="btn btn-primary">Tambah Data</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  <!-- isi konten form tambah Guru -->
+  <?= $this->endSection();?>
+
+```
 
 ---
 ## **Kesimpulan**
-- Anda telah mempelajari dasar-dasar instalasi, routing, controller, views (menamba), dan views di CodeIgniter 4.
-- And
+- Anda telah mempelajari MVC berikut CRUD dengan modelling data dan pengarahan controllers serta penyesuaian viewsnya

@@ -49,5 +49,92 @@ class Sekolah extends BaseController
     return view('sekolah/detail', $data);
 
    }
+    //Form Menambahkan Data Guru
+    public function addguru()
+    {
+        $data = ['title'=>"Tambah Guru"];
 
+        return view('sekolah/addGuru', $data);
+    }
+    //Form Menambahkan Data Siswa
+    public function addsiswa()
+    {
+        $data = [
+            'title'=>"Tambah Siswa",
+            'guru'=>$this->guruModel->getGuru(),
+        ];
+
+        return view('sekolah/addSiswa', $data);
+    }
+    //Form Menyimpan Data Guru
+    public function saveGuru()
+    {
+        // debug
+        // dd($this->request->getVar());
+        $nama = $this->request->getVar('nama');
+        if (isset($nama)) {
+            $param = $nama;
+            $slug = md5($param);
+            $date = date('d-m-y');
+            $slug = md5($param.$date);
+            // Format UUID (8-4-4-4-12)
+            $formatted = substr($slug, 0, 8) . '-' .
+                 substr($slug, 8, 4) . '-' .
+                 substr($slug, 12, 4) . '-' .
+                 substr($slug, 16, 4) . '-' .
+                 substr($slug, 20, 12);
+            // echo '<br>';
+            // echo $formatted; 
+            $this->guruModel->save([
+                'nama'=>$this->request->getVar('nama'),
+                'nip'=>$this->request->getVar('nip'),
+                'mata_pelajaran'=>$this->request->getVar('mapel'),
+                'alamat'=>$this->request->getVar('alamat'),
+                'no_hp'=>$this->request->getVar('no_hp'),
+                'slug'=>$formatted,
+                'created_at'=>$date,
+                'updated_at'=>$date,
+            ]);
+            // session flash
+            session()->setFlashdata('pesan', 'data'.$nama.' berhasil ditambahkan');
+            // jika berhasil update maka redirect ke page index sekolah
+            return redirect()->to('/sekolah');
+         }
+
+    }
+    //Form Menyimpan Data Siswa
+    public function saveSiswa()
+    {
+        // debug dump data
+        // dd($this->request->getVar());
+        $nama = $this->request->getVar('nama');
+        if (isset($nama)) {
+            $param = $nama;
+            $slug = md5($param);
+            $date = date('d-m-y');
+            $slug = md5($param.$date);
+            // Format UUID (8-4-4-4-12)
+            $formatted = substr($slug, 0, 8) . '-' .
+                 substr($slug, 8, 4) . '-' .
+                 substr($slug, 12, 4) . '-' .
+                 substr($slug, 16, 4) . '-' .
+                 substr($slug, 20, 12);
+            // echo '<br>';
+            // echo $formatted; 
+         }
+        $this->siswaModel->save([
+            'nama'=>$this->request->getVar('nama'),
+            'nis'=>$this->request->getVar('nis'),
+            'kelas'=>$this->request->getVar('kelas'),
+            'alamat'=>$this->request->getVar('alamat'),
+            'id_guru_wali'=>$this->request->getVar('walikelas'),
+            'slug'=>$formatted,
+            'created_at'=>$date,
+            'updated_at'=>$date,
+        ]);
+        // session flash
+        session()->setFlashdata('pesan', 'data'.$nama.' berhasil ditambahkan');
+        // jika berhasil update maka redirect ke page index sekolah
+        return redirect()->to('/sekolah');
+    }
 }

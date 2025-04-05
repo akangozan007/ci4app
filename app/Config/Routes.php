@@ -27,3 +27,9 @@ $routes->get('/pages/contact-me', 'Pages::contact');
 $routes->get('/sekolah', 'Sekolah::index');
 // database sekolah page
 $routes->get('/sekolah/(:segment)', 'Sekolah::detail/$1');
+// routes form add page
+$routes->get('/sekolah/guru/addguru', 'Sekolah::addguru');
+$routes->get('/sekolah/siswa/addsiswa', 'Sekolah::addsiswa');
+// routes add post guru dan siswa
+$routes->post('/sekolah/saveGuru', 'Sekolah::saveGuru');
+$routes->post('/sekolah/saveSiswa', 'Sekolah::saveSiswa');

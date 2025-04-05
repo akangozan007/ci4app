@@ -11,6 +11,8 @@ class Siswa extends Model
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
+    // data yang diizinkan untuk ditambahkan ke server
+    protected $allowedFields  = ['nama','nis','kelas','alamat','id_guru_wali','slug'];
 
     public function getSiswa($slug = false)
     {
@@ -21,3 +23,4 @@ class Siswa extends Model
     }
     
 }
+

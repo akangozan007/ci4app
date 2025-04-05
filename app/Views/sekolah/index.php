@@ -1,13 +1,24 @@
 <!-- memanggil template -->
  <?= $this->extend('layout/template');?>
-
  <?= $this->section('content');?>
 <!-- isi konten database -->
     <div class="container-fluid">
         <div class="row">
             <div class="col">
+            <?php if (session()->getFlashdata('pesan')) : ?>
+                <script>
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '<?= session()->getFlashdata('pesan'); ?>',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                </script>
+            <?php endif; ?>
                 <h1 class="text-center my-3">Daftar Siswa</h1>
                 <!-- <h6 class="model-cantik"> css </h6> -->
+                <a href="/sekolah/siswa/addsiswa" class="btn btn-primary my-3"> tambah data siswa</a>
             <table class="table">
                 <thead>
                     <tr>
@@ -38,7 +49,7 @@
             </div>
             <div class="col">
                 <h1 class="text-center my-3">Daftar Guru</h1>
-                <h6 class="model-cantik"> css </h6>
+                <a href="/sekolah/guru/addguru" class="btn btn-primary my-3"> tambah data guru</a>
             <table class="table">
                 <thead>
                     <tr>
@@ -57,7 +68,7 @@
                     <?php foreach ($guru as $data_guru) : ?>
                         <tr>
                             <th scope="row"><?= $b++; ?></th>
-                            <td><img src="<?= $data_guru['gambar']; ?>" class="img-thumbnail w-25" alt=""></td>
+                            <td><img src="<?= $data_guru['gambar']; ?>" class="img-thumbnail " alt=""></td>
                             <td><?= $data_guru['nama']; ?></td>
                             <td><?= $data_guru['nip']; ?></td>
                             <td><?= $data_guru['mata_pelajaran']; ?></td>
