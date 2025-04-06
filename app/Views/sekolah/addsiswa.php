@@ -17,18 +17,22 @@
                                 <?php $error = $validation->getErrors(); ?>
                                 <input name="nama" type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid':'' ?>" placeholder="nama" aria-label="nama" aria-describedby="basic-addon1 validationServerNameFeedback">
                                 <div id="validationNameFeedback" class="invalid-feedback">
-                                <?php foreach ($validation->getErrors() as $error) : ?>
-                <li><?= esc($error) ?></li>
-            <?php endforeach ?>
+                                    <?= $validation->getError('nama'); ?>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <label for="NIS">Data NIS (Wajib diisi)</label>
-                                <input name="nis" type="text" class="form-control <?= ($validation->hasError('nis')) ? 'is-invalid':'' ?>" placeholder="NIS" aria-label="NIS" aria-describedby="basic-addon1">
+                                <input name="nis" type="text" class="form-control <?= ($validation->hasError('nis')) ? 'is-invalid':'' ?>" placeholder="NIS" aria-label="NIS" aria-describedby="basic-addon1 validationNISFeedback">
+                                <div id="validationNISFeedback" class="invalid-feedback">
+                                    <?= $validation->getError('nis'); ?>
+                                </div>
                             </div>
                             <div class="col-6">
                                 <label for="kelas">Data kelas</label>
-                                <input name="kelas" type="text" class="form-control <?= ($validation->hasError('kelas')) ? 'is-invalid':'' ?>" placeholder="kelas" aria-label="kelas" aria-describedby="basic-addon1">
+                                <input name="kelas" type="text" class="form-control <?= ($validation->hasError('kelas')) ? 'is-invalid':'' ?>" placeholder="kelas" aria-label="kelas" aria-describedby="basic-addon1 validationKelasFeedback">
+                                <div id="validationKelasFeedback" class="invalid-feedback">
+                                    <?= $validation->getError('kelas'); ?>
+                                </div>
                             </div>
                             <div class="col-6">
                                 <label for="wali">Pilih Wali kelas</label>
