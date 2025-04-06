@@ -7,6 +7,16 @@
         <div class="row">
             <div class="col-6">
                 <h1> Form Tambah Guru</h1>
+                 <!-- tangkap error  -->
+                 <?php if (!empty($validation->getErrors())) : ?>
+                        <div class="alert alert-danger">
+                            <ul>
+                                <?php foreach ($validation->getErrors() as $error) : ?>
+                                    <li><?= esc($error) ?></li>
+                                <?php endforeach ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
                 <form action="/sekolah/saveGuru" method="post">
                     <?= csrf_field(); ?>
                     <div class="input-group mb-3">

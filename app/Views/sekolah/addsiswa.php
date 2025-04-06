@@ -7,21 +7,28 @@
         <div class="row">
             <div class="col-6">
                 <h1> Form Tambah Siswa</h1>
+                    <!-- tangkap error  -->
                 <form action="/sekolah/saveSiswa" method="post">
                     <?= csrf_field(); ?>
                     <div class="input-group mb-3">
                         <div class="row">
                             <div class="col-6">
                                 <label for="nama">Data nama lengkap</label>
-                                <input name="nama" type="text" class="form-control" placeholder="nama" aria-label="nama" aria-describedby="basic-addon1">
+                                <?php $error = $validation->getErrors(); ?>
+                                <input name="nama" type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid':'' ?>" placeholder="nama" aria-label="nama" aria-describedby="basic-addon1 validationServerNameFeedback">
+                                <div id="validationNameFeedback" class="invalid-feedback">
+                                <?php foreach ($validation->getErrors() as $error) : ?>
+                <li><?= esc($error) ?></li>
+            <?php endforeach ?>
+                                </div>
                             </div>
                             <div class="col-6">
                                 <label for="NIS">Data NIS (Wajib diisi)</label>
-                                <input name="nis" type="text" class="form-control" placeholder="NIS" aria-label="NIS" aria-describedby="basic-addon1">
+                                <input name="nis" type="text" class="form-control <?= ($validation->hasError('nis')) ? 'is-invalid':'' ?>" placeholder="NIS" aria-label="NIS" aria-describedby="basic-addon1">
                             </div>
                             <div class="col-6">
                                 <label for="kelas">Data kelas</label>
-                                <input name="kelas" type="text" class="form-control" placeholder="kelas" aria-label="kelas" aria-describedby="basic-addon1">
+                                <input name="kelas" type="text" class="form-control <?= ($validation->hasError('kelas')) ? 'is-invalid':'' ?>" placeholder="kelas" aria-label="kelas" aria-describedby="basic-addon1">
                             </div>
                             <div class="col-6">
                                 <label for="wali">Pilih Wali kelas</label>
