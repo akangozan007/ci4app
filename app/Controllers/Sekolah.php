@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use App\Models\Guru;
 use App\Models\Siswa;
+use CodeIgniter\Validation\StrictRules\Rules;
 
- 
 class Sekolah extends BaseController
 {
     // membuat var property data Guru
@@ -92,7 +92,16 @@ class Sekolah extends BaseController
         // required (harus diisi)
         // alpha_space (harus alphabet dan spasi input)
         if ($this->validate([
-            'nama' => 'required|alpha_space',
+            'nama' => [
+                // rules
+                'rules' => 'required|alpha_space',
+                // kustom pesan error
+                'errors' => [
+                    'required'=>'{field} Wajib diiisi',
+                    'alpha_space'=>'{field}Berlaku hanya alphabet dan spasi',
+                ],
+            ],
+            'mapel' => 'required|alpha_space',
             'nip'=> 'required|integer|is_unique[guru.nip]|max_length[14]',
             'ponsel'=>'required|numeric|regex[^\+?[0-9]+$]|max_length[12]',
         ])) {
@@ -144,8 +153,27 @@ class Sekolah extends BaseController
         // dd($this->request->getVar());
 
         if ($this->validate([
-            'nama' => 'required|alpha_space',
-            'nis'=> 'required|integer|is_unique[siswa.nis]|max_length[14]',
+            'nama' => [
+                // rules
+                'rules' => 'required|alpha_space',
+                // kustom pesan error
+                'errors' => [
+                    'required'=>'{field} Wajib diiisi',
+                    'alpha_space'=>'{field} Berlaku hanya alphabet dan spasi',
+                ],
+            ],
+            // 'nis'=> 'required|integer|is_unique[siswa.nis]|max_length[14]',
+            'nis' => [
+                // rules
+                'rules' => 'required|integer|is_unique[siswa.nis]|max_length[14]',
+                // kustom pesan error
+                'errors' => [
+                    'required'=>'{field} Wajib diisi',
+                    'integer'=>'{field} Inputan hanya berlaku angka',
+                    'is_unique[siswa.nis]'=>'{field} Data sudah ada sebelumnya',
+                    'max_length[14]'=>'{field} Jumlah angka maksimal 14 digit',
+                ],
+            ],
             'kelas' => 'required|alpha_numeric_punct',
         ])) {
             $nama = $this->request->getVar('nama');

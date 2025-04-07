@@ -47,6 +47,7 @@
                             <div class="col-6">
                                 <label for="alamat">Data alamat</label>
                                 <textarea name="alamat" class="form-control" aria-label="alamat" placeholder="alamat"></textarea>
+                                
                             </div>
                         </div>
                         <div class="container mt-4">
