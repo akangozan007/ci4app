@@ -93,7 +93,7 @@ class Sekolah extends BaseController
         // alpha_space (harus alphabet dan spasi input)
         if ($this->validate([
             'nama' => [
-                // rules
+                // rules nama
                 'rules' => 'required|alpha_space',
                 // kustom pesan error
                 'errors' => [
@@ -101,9 +101,35 @@ class Sekolah extends BaseController
                     'alpha_space'=>'{field}Berlaku hanya alphabet dan spasi',
                 ],
             ],
-            'mapel' => 'required|alpha_space',
-            'nip'=> 'required|integer|is_unique[guru.nip]|max_length[14]',
-            'ponsel'=>'required|numeric|regex[^\+?[0-9]+$]|max_length[12]',
+            'mapel' => [
+                // rules nama
+                'rules' => 'required|alpha_space',
+                // kustom pesan error
+                'errors'=>[
+                    'required'=>'{field}mapel Wajib diisi',
+                    'alpha_space'=>'{field} Berlaku hanya alphabet dan spasi'
+                ],
+            ],
+            'nip'=> [
+                  // rules nip
+                'rules' => 'required|integer|is_unique[guru.nip]|max_length[14]',
+                // kustom pesan error
+                'errors' => [
+                    'required'=>'{field} NIP Wajib diisi',
+                    'integer'=>'{field} Tipe data harus angka',
+                    'is_unique[guru.nip]'=>'{field} Data NIP belum ditemukan',
+                    'max_length[14]'=>'{field} Maksimal 14 karakter',
+                ],
+            ],
+            'ponsel'=>[
+                'rules'=>'required|numeric|regex[^\+?[0-9]+$]|max_length[12]',
+                'errors'=>[
+                    'required'=>'{field} Nomor whatsapp Wajib diisi',
+                    'numeric'=> '{field} haruslah angka',
+                    'regex[^\+?[0-9]+$]' => '{field} nomor cuma angka & +',
+                    'max_length[12]'=> '{field} inputan maksimal 12 karakter',
+                ],
+            ]
         ])) {
             # code...
 
@@ -162,7 +188,6 @@ class Sekolah extends BaseController
                     'alpha_space'=>'{field} Berlaku hanya alphabet dan spasi',
                 ],
             ],
-            // 'nis'=> 'required|integer|is_unique[siswa.nis]|max_length[14]',
             'nis' => [
                 // rules
                 'rules' => 'required|integer|is_unique[siswa.nis]|max_length[14]',
@@ -175,6 +200,7 @@ class Sekolah extends BaseController
                 ],
             ],
             'kelas' => 'required|alpha_numeric_punct',
+            'walikelas'=>'required|integer',
         ])) {
             $nama = $this->request->getVar('nama');
             if (isset($nama)) {
@@ -217,5 +243,64 @@ class Sekolah extends BaseController
             
         }
 
-       
+        // delete siswa
+        public function siswadelete($slug)
+        {
+            // panggil model, where user slug sama dengan
+            $this->siswaModel->where('slug', $slug)->delete();
+             // session flash
+             session()->setFlashdata('pesan', 'data '.$slug.' berhasil dihapus');
+            return redirect()->to('/sekolah');
+        }
+         // delete guru
+         public function gurudelete($slug)
+         {
+            // panggil model, where user slug sama dengan
+            $kondisi = $this->guruModel->where('slug', $slug)->delete();
+             if ($kondisi) {
+                session()->setFlashdata('pesan', 'data '.$slug.' berhasil dihapus');
+                return redirect()->to('/sekolah');   # code...
+             }else{
+                session()->setFlashdata('pesan', 'data '.$slug.' gagal dihapus');
+                return redirect()->to('/sekolah');   # code...
+             }
+             
+         }
+
+        // edit siswa
+       public function editsiswa($slug)
+       {
+            $data = [
+                'title'=>"Edit data Siswa",
+                'guru'=>$this->guruModel->getGuru(),
+                'validation'=>\Config\Services::validation(),
+                // 'siswa'=>$this->siswaModel->getSiswa(),
+                'guru' => $this->guruModel->getGuruBySlug($slug),
+            ];
+            
+            // Cek apakah ada flashdata 'validation' dari redirect
+            if (session()->has('validation')) {
+                $data['validation'] = session('validation');
+            }
+
+            return view('/sekolah/siswa/editsiswa', $data);
+       }
+    // edit guru
+    public function editguru($slug)
+    {
+         $data = [
+             'title'=>"Edit data Guru",
+            //  'guru'=>$this->guruModel->getGuru(),
+            'guru' => $this->guruModel->getGuruBySlug($slug),
+             'validation'=>\Config\Services::validation(),
+            //  'siswa'=>$this->siswaModel->getSiswa(),
+         ];
+         
+         // Cek apakah ada flashdata 'validation' dari redirect
+         if (session()->has('validation')) {
+             $data['validation'] = session('validation');
+         }
+
+         return view('/sekolah/guru/editguru', $data);
+    }
 }

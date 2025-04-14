@@ -25,8 +25,12 @@
                     <p class="card-text">Handphone : <?= $guru['nip'] ;?></p>
                     <p class="card-text"><small class="text-body-secondary"><?= $guru['alamat'] ;?></small></p>
                     <div class="container">
-                        <a href="" class="btn btn-info text-white">edit</a>
-                        <a href="" class="btn btn-danger text-white">delete</a>
+                        <a href="/sekolah/guru/editguru/<?= $guru['slug'];?>" class="btn btn-info text-white">edit</a>
+                        <form action="/sekolah/gurudelete/<?= $guru['slug'];?>" method="post">
+                            <?= csrf_field(); ?>
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger text-white">delete</button>
+                        </form>
                     </div>
                 </div>
                     <?php endif; ?>
@@ -36,8 +40,12 @@
                     <p class="card-text">kelas          : <?= $siswa['kelas'] ;?></p>
                     <p class="card-text"><small class="text-body-secondary"><?= $siswa['alamat'] ;?></small></p>
                     <div class="container">
-                        <a href="" class="btn btn-info text-white">edit</a>
-                        <a href="" class="btn btn-danger text-white">delete</a>
+                        <a href="/sekolah/siswa/editsiswa/<?= $siswa['slug'];?>" class="btn btn-info text-white">edit</a>
+                        <form action="/sekolah/siswadelete/<?= $siswa['slug'];?>" method="post">
+                            <?= csrf_field(); ?>
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger text-white">delete</button>
+                        </form>
                     </div>
                     <?php endif; ?>
                 </div>

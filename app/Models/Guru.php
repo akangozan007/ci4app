@@ -22,4 +22,10 @@ class Guru extends Model
         }
         return $this->where(['slug' => $slug])->first();
     }
+
+    public function getGuruBySlug($slug)
+    {
+        return $this->where('slug', $slug)->first();
+    }
+
 }

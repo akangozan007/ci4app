@@ -22,6 +22,11 @@ class Siswa extends Model
         }
         return $this->where(['slug' => $slug])->first();
     }
+    public function getSiswaBySlug($slug)
+    {
+        return $this->where('slug', $slug)->first();
+    }
+    
     
 }
 
