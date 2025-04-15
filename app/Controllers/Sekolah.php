@@ -244,7 +244,7 @@ class Sekolah extends BaseController
         }
 
         // delete siswa
-        public function siswadelete($slug)
+        public function siswac($slug)
         {
             // panggil model, where user slug sama dengan
             $this->siswaModel->where('slug', $slug)->delete();
@@ -274,8 +274,7 @@ class Sekolah extends BaseController
                 'title'=>"Edit data Siswa",
                 'guru'=>$this->guruModel->getGuru(),
                 'validation'=>\Config\Services::validation(),
-                // 'siswa'=>$this->siswaModel->getSiswa(),
-                'guru' => $this->guruModel->getGuruBySlug($slug),
+                'siswa' => $this->siswaModel->getSiswaBySlug($slug),
             ];
             
             // Cek apakah ada flashdata 'validation' dari redirect
@@ -283,7 +282,7 @@ class Sekolah extends BaseController
                 $data['validation'] = session('validation');
             }
 
-            return view('/sekolah/siswa/editsiswa', $data);
+            return view('/sekolah/editsiswa', $data);
        }
     // edit guru
     public function editguru($slug)
@@ -301,6 +300,49 @@ class Sekolah extends BaseController
              $data['validation'] = session('validation');
          }
 
-         return view('/sekolah/guru/editguru', $data);
+         return view('/sekolah/editguru', $data);
     }
+      // edit siswa
+      public function updatesiswa($slug)
+      {
+        // ambil data berdasarkan slug
+        $siswa = $this->siswaModel->getSiswaBySlug($slug);
+        $date = date('d-m-y');
+          $data = [
+            'nama'=>$this->request->getVar('nama'),
+            'nis'=>$this->request->getVar('nis'),
+            'kelas'=>$this->request->getVar('kelas'),
+            'alamat'=>$this->request->getVar('alamat'),
+            'id_guru_wali'=>$this->request->getVar('walikelas'),
+            'created_at'=>$date,
+            'updated_at'=>$date,
+          ];
+           // Cek apakah ada flashdata 'validation' dari redirect
+           if (session()->has('validation')) {
+               $data['validation'] = session('validation');
+           }
+            //  update
+           $this->siswaModel->update($siswa['id_siswa'], $data);
+           session()->setFlashdata('pesan', 'Data siswa '.$siswa['nama'].' diupdate.');
+        //    return view('/sekolah/siswa/editsiswa/'.$slug, $data);
+          return redirect()->to('/sekolah/siswa/editsiswa/'.$siswa['slug']); 
+      }
+   // edit guru
+   public function updateguru($slug)
+   {
+        $data = [
+            'title'=>"Edit data Guru",
+           //  'guru'=>$this->guruModel->getGuru(),
+           'guru' => $this->guruModel->getGuruBySlug($slug),
+            'validation'=>\Config\Services::validation(),
+           //  'siswa'=>$this->siswaModel->getSiswa(),
+        ];
+        
+        // Cek apakah ada flashdata 'validation' dari redirect
+        if (session()->has('validation')) {
+            $data['validation'] = session('validation');
+        }
+
+        return view('/sekolah/guru/editguru/'.$slug, $data);
+   }
 }

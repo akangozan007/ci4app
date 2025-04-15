@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-6">
                 <h1> Form Ubah Data Guru</h1>
-                <form action="/sekolah/guru/editgurupost/<?= $guru['slug'];?>" method="post">
+                <form action="/sekolah/editgurupost/<?= $guru['slug'];?>" method="post">
                     <?= csrf_field(); ?>
                     <div class="input-group mb-3">
                         <div class="row">

@@ -31,11 +31,11 @@ $routes->get('/sekolah/(:segment)', 'Sekolah::detail/$1');
 $routes->get('/sekolah/guru/addguru', 'Sekolah::addguru');
 $routes->get('/sekolah/siswa/addsiswa', 'Sekolah::addsiswa');
 // routes form post edit page
-$routes->get('/sekolah/guru/editguru/(:any)', 'Sekolah::editguru/$1');
-$routes->get('/sekolah/siswa/editsiswa/(:any)', 'Sekolah::editsiswa/$1');
+$routes->get('/sekolah/guru/editguru/(:segment)', 'Sekolah::editguru/$1');
+$routes->get('/sekolah/siswa/editsiswa/(:segment)', 'Sekolah::editsiswa/$1');
 // routes form post edit page
-$routes->post('/sekolah/guru/editgurupost/(:any)', 'Sekolah::editguru/$1');
-$routes->post('/sekolah/siswa/editsiswapost/(:any)', 'Sekolah::editsiswa/$1');
+$routes->post('/sekolah/editgurupost/(:segment)', 'Sekolah::updateguru/$1');
+$routes->post('/sekolah/editsiswapost/(:segment)', 'Sekolah::updatesiswa/$1');
 // routes add post guru dan siswa
 $routes->post('/sekolah/saveGuru', 'Sekolah::saveGuru');
 $routes->post('/sekolah/saveSiswa', 'Sekolah::saveSiswa');
