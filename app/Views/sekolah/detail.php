@@ -10,10 +10,10 @@
             <div class="row g-0">
                 <div class="col-md-4">
                 <?php if($guru): ?>
-                <img src="<?= $guru['gambar'] ;?>" class="img-fluid rounded-start" alt="...">
+                <img src="/img/guru/<?= $guru['gambar'] ;?>" class="img-fluid rounded-start" alt="...">
                 <?php endif; ?>
                 <?php if($siswa): ?>
-                <img src="<?= $siswa['gambar'] ;?>" class="img-fluid rounded-start" alt="...">
+                <img src="/img/siswa/<?= $siswa['gambar'] ;?>" class="img-fluid rounded-start" alt="...">
                 <?php endif; ?>
                 </div>
                 <div class="col-md-8">

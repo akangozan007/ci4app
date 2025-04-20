@@ -36,7 +36,7 @@
                     <?php foreach ($siswa as $data_siswa) : ?>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
-                            <td><img src="<?= $data_siswa['gambar']; ?>"  class="img-thumbnail w-25" alt=""></td>
+                            <td><img src="/img/siswa/<?= $data_siswa['gambar']; ?>"  class="img-thumbnail w-25" alt=""></td>
                             <td><?= $data_siswa['nama']; ?></td>
                             <td><?= $data_siswa['nis']; ?></td>
                             <td><?= $data_siswa['kelas']; ?></td>
@@ -68,7 +68,7 @@
                     <?php foreach ($guru as $data_guru) : ?>
                         <tr>
                             <th scope="row"><?= $b++; ?></th>
-                            <td><img src="<?= $data_guru['gambar']; ?>" class="img-thumbnail " alt=""></td>
+                            <td><img src="/img/guru/<?= $data_guru['gambar']; ?>" class="img-thumbnail " alt=""></td>
                             <td><?= $data_guru['nama']; ?></td>
                             <td><?= $data_guru['nip']; ?></td>
                             <td><?= $data_guru['mata_pelajaran']; ?></td>

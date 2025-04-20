@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-6">
                 <h1> Form Ubah Data Guru</h1>
-                <form action="/sekolah/editgurupost/<?= $guru['slug'];?>" method="post">
+                <form action="/sekolah/editgurupost/<?= $guru['slug'];?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="input-group mb-3">
                         <div class="row">
@@ -45,6 +45,16 @@
                                 <label for="alamat">Data alamat</label>
                                 <textarea value="<?= $guru['alamat'];?>" name="alamat" class="form-control" aria-label="alamat" placeholder="alamat"></textarea>
                             </div>
+                            <div class="col-6">
+                                <label for="inputGroupFile02" class="my-3">Upload Foto</label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control <?= ($validation->hasError('gambar')) ? 'is-invalid':'' ?>" id="inputGroupFile02"  aria-describedby="validationGAMBARFeedback" name="gambar">
+                                        <div id="validationGAMBARFeedback" class="invalid-feedback">
+                                            <?= $validation->getError('gambar'); ?>
+                                        </div>
+                                    </div>
+                            </div>
+
                         </div>
                         <div class="container mt-4">
                             <button type="submit" class="btn btn-primary">Ubah Data</button>

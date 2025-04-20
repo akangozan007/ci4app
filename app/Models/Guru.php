@@ -12,7 +12,7 @@ class Guru extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     // data yang diizinkan untuk ditambahkan ke server
-    protected $allowedFields  = ['nama','nip','mata_pelajaran','alamat','no_hp','slug'];
+    protected $allowedFields  = ['nama','nip','mata_pelajaran','alamat','no_hp','slug', 'gambar'];
 
     public function getGuru($slug = false)
     {

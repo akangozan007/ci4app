@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-6">
                 <h1> Form Ubah Data Siswa</h1>
-                <form action="/sekolah/editsiswapost/<?= $siswa['slug'];?>" method="post">
+                <form action="/sekolah/editsiswapost/<?= $siswa['slug'];?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="input-group mb-3">
                         <div class="row">
@@ -50,6 +50,15 @@
                             <div class="col-6">
                                 <label for="alamat">Data alamat</label>
                                 <textarea name="alamat" class="form-control" aria-label="<?= $siswa['alamat'];?>" placeholder="<?= $siswa['alamat'];?>"></textarea>
+                            </div>
+                            <div class="col-6">
+                                <label for="inputGroupFile02" class="my-3">Upload Foto</label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control <?= ($validation->hasError('gambar')) ? 'is-invalid':'' ?>" id="inputGroupFile02"  aria-describedby="validationGAMBARFeedback" name="gambar">
+                                        <div id="validationGAMBARFeedback" class="invalid-feedback">
+                                            <?= $validation->getError('gambar'); ?>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                         <div class="container mt-4">

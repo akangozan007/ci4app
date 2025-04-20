@@ -8,7 +8,7 @@
             <div class="col-6">
                 <h1> Form Tambah Siswa</h1>
                     <!-- tangkap error  -->
-                <form action="/sekolah/saveSiswa" method="post">
+                <form action="<?= base_url('/sekolah/saveSiswa/'); ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="input-group mb-3">
                         <div class="row">
@@ -40,7 +40,7 @@
                                 <label for="Pilih Wali Kelas"></label>
                                     <option selected>Silakan Pilih</option>
                                     <?php foreach($guru as $pilih_guru) : ?>
-                                        <option value="<?= old('id_guru');?>" aria-describedby="basic-addon1 validationWALIKELASFeedback"> <?= $pilih_guru['nama'];?> kode Guru : <?= $pilih_guru['id_guru'];?></option>
+                                        <option value="<?= $pilih_guru['id_guru']; ?>" aria-describedby="basic-addon1 validationWALIKELASFeedback"> <?= $pilih_guru['nama'];?> kode Guru : <?= $pilih_guru['id_guru'];?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <div id="validationWALIKELASFeedback" class="invalid-feedback">
@@ -50,7 +50,16 @@
                             <div class="col-6">
                                 <label for="alamat">Data alamat</label>
                                 <textarea name="alamat" class="form-control" aria-label="alamat" placeholder="alamat"></textarea>
-                                
+                            </div>
+                            <div class="col-6">
+                                <label for="inputGroupFile02" class="my-3">Upload Foto</label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control <?= ($validation->hasError('gambar')) ? 'is-invalid':'' ?>" id="inputGroupFile02"  aria-describedby="validationGAMBARFeedback" name="gambar">
+                                        <div id="validationGAMBARFeedback" class="invalid-feedback">
+                                            <?= $validation->getError('gambar'); ?>
+                                        </div>
+                                    </div>
+                                    
                             </div>
                         </div>
                         <div class="container mt-4">
